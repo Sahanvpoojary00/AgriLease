@@ -1,5 +1,7 @@
 <div align="center">
 
+<img src="logo.png" alt="AgriLease Logo" width="600"/>
+
 # 🌾 AgriLease
 
 ### The Smart Bridge Between Landowners and Cultivators
@@ -9,6 +11,7 @@ Smart Agricultural Land Leasing & Farmer Empowerment Platform
 </div>
 
 ---
+
 
 
 AgriLease is a technology-driven platform designed to optimize
