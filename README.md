@@ -1,6 +1,13 @@
-**🌾 AgriLease**
+<div align="center">
 
-**The Smart Bridge Between Landowners and Cultivators**
+# 🌾 AgriLease
+
+### The Smart Bridge Between Landowners and Cultivators
+
+Smart Agricultural Land Leasing & Farmer Empowerment Platform
+
+</div>
+
 
 Smart Agricultural Land Leasing & Farmer Empowerment Platform
 
