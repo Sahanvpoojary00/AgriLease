@@ -8,8 +8,8 @@ Smart Agricultural Land Leasing & Farmer Empowerment Platform
 
 </div>
 
+---
 
-Smart Agricultural Land Leasing & Farmer Empowerment Platform
 
 AgriLease is a technology-driven platform designed to optimize
 agricultural land utilization by connecting landowners with landless
