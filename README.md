@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="logo.png" alt="AgriLease Logo" width="600"/>
+<img src="logo.PNG" alt="AgriLease Logo" width="600"/>
 
 # 🌾 AgriLease
 
@@ -58,12 +58,19 @@ Accessible to farmers across different regions of India.
 🏗️ System Architecture (High-Level)
 
 User (Farmer/Landowner) 
+
 ⬇ 
+
 Frontend (Web/Mobile App) 
+
 ⬇ 
+
 Backend API (Authentication, Matching Engine, Payment System) 
+
 ⬇ 
+
 Database (User Data, Land Listings, Lease Agreements) 
+
 ⬇ 
 
 External Integrations: 
