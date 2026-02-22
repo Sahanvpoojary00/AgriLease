@@ -93,3 +93,22 @@ export interface Contract {
 
 export const SOIL_TYPES = ['Clay', 'Sandy', 'Loamy', 'Silt', 'Peat', 'Chalk', 'Black Cotton', 'Red Laterite'] as const;
 export type SoilType = typeof SOIL_TYPES[number];
+
+export interface WeatherData {
+    temp: number;
+    condition: string;
+    humidity: number;
+    windSpeed: number;
+    icon: string;
+}
+
+export interface MarketPrice {
+    commodity: string;
+    price: number;
+    unit: string;
+    trend: 'up' | 'down' | 'stable';
+    change: number;
+}
+
+
+

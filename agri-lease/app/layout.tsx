@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import './globals.css';
 import { InsforgeProvider } from './providers';
 import { CropDoctorFAB } from '@/components/ui/CropDoctorFAB';
+import PageTransition from '@/components/animations/PageTransition';
 
 export const metadata: Metadata = {
   title: 'AgriLease – Agricultural Land Leasing Platform',
@@ -31,7 +32,9 @@ export default function RootLayout({
       </head>
       <body className="bg-earth-deep text-white antialiased">
         <InsforgeProvider>
-          {children}
+          <PageTransition>
+            {children}
+          </PageTransition>
           <CropDoctorFAB />
         </InsforgeProvider>
       </body>
