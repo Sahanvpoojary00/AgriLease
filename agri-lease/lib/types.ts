@@ -1,4 +1,4 @@
-export type UserRole = 'farmer' | 'landowner' | 'admin';
+export type UserRole = 'farmer' | 'landowner' | 'admin' | 'vendor';
 
 export interface Profile {
     id: string;
@@ -10,6 +10,14 @@ export interface Profile {
     phone: string | null;
     language: string;
     updated_at: string | null;
+    state: string | null;
+    district: string | null;
+    pin_code: string | null;
+    latitude: number | null;
+    longitude: number | null;
+    shop_name: string | null;
+    business_address: string | null;
+    is_verified: boolean;
 }
 
 export interface Listing {
@@ -99,6 +107,8 @@ export interface WeatherData {
     condition: string;
     humidity: number;
     windSpeed: number;
+    feelsLike: number;
+    lastUpdated: string;
     icon: string;
 }
 
@@ -109,6 +119,46 @@ export interface MarketPrice {
     trend: 'up' | 'down' | 'stable';
     change: number;
 }
+export interface Diagnosis {
+    id: string;
+    user_id: string;
+    image_url: string | null;
+    plant_name: string | null;
+    disease_name: string | null;
+    confidence: number | null;
+    is_healthy: boolean;
+    treatment_suggestions: string | null;
+    created_at: string;
+}
 
+export interface Product {
+    id: string;
+    vendor_id: string;
+    name: string;
+    description: string | null;
+    price: number;
+    category: 'Seeds' | 'Fertilizers' | 'Pesticides' | 'Tools';
+    image_url: string | null;
+    pin_code: string | null;
+    stock_quantity: number;
+    created_at: string;
+    // joined
+    vendor?: Profile;
+}
 
-
+export interface Order {
+    id: string;
+    buyer_id: string;
+    vendor_id: string;
+    product_id: string;
+    quantity: number;
+    total_price: number;
+    status: 'Pending' | 'Accepted' | 'Delivered' | 'Cancelled';
+    delivery_address: string;
+    phone_number: string;
+    created_at: string;
+    // joined
+    buyer?: Profile;
+    vendor?: Profile;
+    product?: Product;
+}

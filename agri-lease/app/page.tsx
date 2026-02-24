@@ -3,7 +3,8 @@
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { useState, useEffect } from 'react';
-import { SignInButton } from '@insforge/nextjs';
+import { useRouter } from 'next/navigation';
+import { SignInButton, useUser } from '@insforge/nextjs';
 import { insforge } from '@/lib/insforge';
 import { Navbar } from '@/components/layout/Navbar';
 import { Footer } from '@/components/layout/Footer';
@@ -105,8 +106,25 @@ const features = [
 ];
 
 export default function LandingPage() {
+  const { user } = useUser();
+  const router = useRouter();
+  const [role, setRole] = useState<string | null>(null);
   const [featuredListings, setFeaturedListings] = useState<Listing[]>([]);
   const [loadingListings, setLoadingListings] = useState(true);
+
+  useEffect(() => {
+    if (user) {
+      const fetchRole = async () => {
+        const { data } = await insforge.database
+          .from('profiles')
+          .select('role')
+          .eq('id', user.id)
+          .single();
+        if (data) setRole(data.role);
+      };
+      fetchRole();
+    }
+  }, [user]);
 
   useEffect(() => {
     const fetchFeatured = async () => {
@@ -140,7 +158,7 @@ export default function LandingPage() {
       <CropGrowth />
 
       {/* Hero Section */}
-      <section className="relative h-screen flex items-center justify-center overflow-hidden">
+      <section className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden pt-32 pb-20">
         {/* Background Image with Parallax & Overlay */}
         <motion.div
           initial={{ scale: 1.15, opacity: 0 }}
@@ -205,6 +223,11 @@ export default function LandingPage() {
                 <motion.button
                   whileHover={{ scale: 1.05, boxShadow: '0 0 40px rgba(82, 183, 136, 0.5)' }}
                   whileTap={{ scale: 0.95 }}
+                  onClick={() => {
+                    if (user && role === 'landowner') {
+                      router.push('/listings');
+                    }
+                  }}
                   className="w-full sm:w-auto px-12 py-6 rounded-[2rem] bg-gradient-green text-white font-black text-2xl transition-all shadow-glow-olive flex items-center justify-center gap-4 group"
                 >
                   <span className="group-hover:rotate-12 transition-transform">🚜</span>
@@ -224,25 +247,28 @@ export default function LandingPage() {
             </div>
 
             {/* Real-time Data Panel */}
-            <div className="max-w-4xl mx-auto mt-12 mb-10">
+            <div className="max-w-4xl mx-auto mt-16 mb-24 relative z-20">
               <RealTimeDashboard />
             </div>
           </ScrollReveal>
         </div>
 
+        {/* Visual Separation Gradient */}
+        <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-earth-deep to-transparent z-10 pointer-events-none" />
+
         {/* Scroll Indicator */}
         <motion.div
           animate={{ y: [0, 10, 0] }}
           transition={{ duration: 2, repeat: Infinity }}
-          className="absolute bottom-10 left-1/2 -translate-x-1/2 z-20 text-muted/50 flex flex-col items-center gap-2"
+          className="absolute bottom-6 left-1/2 -translate-x-1/2 z-30 text-muted/50 flex flex-col items-center gap-2"
         >
           <span className="text-xs font-bold tracking-[0.3em] uppercase">Scroll</span>
-          <div className="w-px h-12 bg-gradient-to-b from-muted/50 to-transparent" />
+          <div className="w-px h-10 bg-gradient-to-b from-muted/50 to-transparent" />
         </motion.div>
       </section>
 
       {/* Stats Bar */}
-      <section className="border-y border-white/5 bg-white/[0.02] backdrop-blur-sm py-20 relative z-20">
+      <section className="border-y border-white/5 bg-white/[0.02] backdrop-blur-sm py-32 relative z-10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-12">
             {stats.map((stat, i) => (
