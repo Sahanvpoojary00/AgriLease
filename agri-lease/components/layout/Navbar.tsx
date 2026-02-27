@@ -5,8 +5,12 @@ import { useUser } from '@insforge/nextjs';
 import { useState, useEffect } from 'react';
 import { insforge } from '@/lib/insforge';
 
+import { useLanguage } from '@/components/providers/LanguageProvider';
+import { LanguageSelector } from '@/components/ui/LanguageSelector';
+
 export function Navbar() {
     const { user, isLoaded } = useUser();
+    const { t } = useLanguage();
     const [mobileOpen, setMobileOpen] = useState(false);
     const [userRole, setUserRole] = useState<string | undefined>(user?.profile?.role as string);
 
@@ -33,22 +37,22 @@ export function Navbar() {
     const role = userRole;
 
     const farmerLinks = [
-        { href: '/dashboard', label: 'Dashboard' },
-        { href: '/listings', label: 'Find Land' },
-        { href: '/applications', label: 'My Applications' },
-        { href: '/contracts', label: 'Contracts' },
+        { href: '/dashboard', label: t('nav.dashboard') },
+        { href: '/listings', label: t('nav.findLand') },
+        { href: '/applications', label: t('nav.myApplications') },
+        { href: '/contracts', label: t('nav.contracts') },
     ];
 
     const landownerLinks = [
-        { href: '/dashboard', label: 'Dashboard' },
-        { href: '/listings/new', label: 'List Property' },
-        { href: '/applications', label: 'Applications' },
-        { href: '/contracts', label: 'Contracts' },
+        { href: '/dashboard', label: t('nav.dashboard') },
+        { href: '/listings/new', label: t('nav.listProperty') },
+        { href: '/applications', label: t('nav.applications') },
+        { href: '/contracts', label: t('nav.contracts') },
     ];
 
     const vendorLinks = [
-        { href: '/dashboard', label: 'Dashboard' },
-        { href: '/market', label: 'Agri Market' },
+        { href: '/dashboard', label: t('nav.dashboard') },
+        { href: '/market', label: t('nav.agriMarket') },
     ];
 
     const navLinks = role === 'landowner' ? landownerLinks : role === 'farmer' ? farmerLinks : role === 'vendor' ? vendorLinks : [];
@@ -85,7 +89,7 @@ export function Navbar() {
                                 <Link href="/crop-doctor">
                                     <button className="flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-black uppercase tracking-widest hover:bg-emerald-500/20 hover:shadow-glow-emerald/20 hover:scale-105 transition-all">
                                         <span className="text-base">🩺</span>
-                                        Crop Doctor
+                                        {t('nav.cropDoctor')}
                                     </button>
                                 </Link>
                                 <Link href="/market">
@@ -93,25 +97,28 @@ export function Navbar() {
                                         <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
                                         </svg>
-                                        Agri Market
+                                        {t('nav.agriMarket')}
                                     </button>
                                 </Link>
                             </div>
                         </div>
                     )}
 
-                    {/* Auth Controls */}
+                    {/* Auth Controls & Language */}
                     <div className="flex items-center gap-3">
+                        <div className="mr-2">
+                            <LanguageSelector />
+                        </div>
                         <SignedOut>
                             <Link
                                 href="/"
                                 className="hidden sm:block text-sm font-medium text-muted hover:text-white transition-colors"
                             >
-                                Sign In
+                                {t('nav.signIn')}
                             </Link>
                             <SignInButton>
                                 <button className="px-4 py-2 rounded-lg bg-gradient-green text-white text-sm font-semibold hover:opacity-90 transition-opacity shadow-glow-olive">
-                                    Get Started
+                                    {t('nav.getStarted')}
                                 </button>
                             </SignInButton>
                         </SignedOut>

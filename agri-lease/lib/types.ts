@@ -128,6 +128,7 @@ export interface Diagnosis {
     confidence: number | null;
     is_healthy: boolean;
     treatment_suggestions: string | null;
+    debug_info?: string | null;
     created_at: string;
 }
 

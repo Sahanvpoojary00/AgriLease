@@ -13,6 +13,7 @@ import { Counter } from '@/components/animations/Counter';
 import { CropGrowth } from '@/components/animations/CropGrowth';
 import { Scene3D } from '@/components/animations/Scene3D';
 import { RealTimeDashboard } from '@/components/home/RealTimeDashboard';
+import { useLanguage } from '@/components/providers/LanguageProvider';
 import type { Listing } from '@/lib/types';
 
 const howItWorksSteps = [
@@ -107,6 +108,7 @@ const features = [
 
 export default function LandingPage() {
   const { user } = useUser();
+  const { t } = useLanguage();
   const router = useRouter();
   const [role, setRole] = useState<string | null>(null);
   const [featuredListings, setFeaturedListings] = useState<Listing[]>([]);
@@ -202,19 +204,18 @@ export default function LandingPage() {
             {/* Tag */}
             <motion.div className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-success/40 bg-success/15 text-success text-sm font-semibold mb-10 backdrop-blur-sm">
               <span className="w-2.5 h-2.5 rounded-full bg-success animate-ping" />
-              India&apos;s Smartest Agricultural Ecosystem
+              {t('home.heroBadge')}
             </motion.div>
 
             {/* Headline */}
             <h1 className="font-heading font-black text-6xl sm:text-8xl lg:text-9xl text-white leading-[0.95] mb-8 tracking-tighter">
-              The Future of <br className="hidden sm:block" />
-              <span className="gradient-text">Agri-Leasing.</span>
+              {t('home.heroTitlePrefix')}<br className="hidden sm:block" />
+              <span className="gradient-text">{t('home.heroTitleSuffix')}</span>
             </h1>
 
             {/* Subheadline */}
             <p className="text-muted text-xl sm:text-3xl leading-relaxed mb-12 max-w-4xl mx-auto font-light tracking-tight opacity-90">
-              Empowering farmers through PIN-proximity matching,
-              secure profit sharing, and digital-first contracts.
+              {t('home.heroDesc')}
             </p>
 
             {/* CTAs */}
@@ -231,7 +232,7 @@ export default function LandingPage() {
                   className="w-full sm:w-auto px-12 py-6 rounded-[2rem] bg-gradient-green text-white font-black text-2xl transition-all shadow-glow-olive flex items-center justify-center gap-4 group"
                 >
                   <span className="group-hover:rotate-12 transition-transform">🚜</span>
-                  Find Land
+                  {t('home.findLandBtn')}
                 </motion.button>
               </SignInButton>
               <SignInButton>
@@ -241,7 +242,7 @@ export default function LandingPage() {
                   className="w-full sm:w-auto px-12 py-6 rounded-[2rem] border-2 border-white/20 text-white font-black text-2xl hover:border-success/50 transition-all flex items-center justify-center gap-4"
                 >
                   <span>📋</span>
-                  List Property
+                  {t('home.listPropertyBtn')}
                 </motion.button>
               </SignInButton>
             </div>
